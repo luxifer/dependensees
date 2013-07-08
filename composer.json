@@ -1,0 +1,25 @@
+{
+    "name": "DependenSees",
+    "description": "Command-line tool to check wether composer depencies are up to date",
+    "version": "1.0.0-dev",
+    "type": "library",
+    "keywords": ["dependencies"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Florent Viel",
+            "email": "luxifer666@gmail.com",
+            "homepage": "http://florentviel.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "symfony/console": "2.3.*@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "DependenSees\\": "lib/"
+        }
+    },
+    "bin": ["bin/dependensees"]
+}
