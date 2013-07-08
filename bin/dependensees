@@ -4,7 +4,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Symfony\Component\Console\Application;
+use DependenSees\Application;
 
 $console = new Application('DependenSees', '1.0.0-dev');
 $console->run();
