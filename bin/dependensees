@@ -2,9 +2,23 @@
 
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+$classLoader = require __DIR__ . '/../vendor/autoload.php';
+$projectDir = __DIR__ . '/..';
 
 use DependenSees\Application;
+use Dflydev\EmbeddedComposer\Core\EmbeddedComposerBuilder;
 
-$console = new Application('DependenSees', '1.0.0-dev');
+$embeddedComposerBuilder = new EmbeddedComposerBuilder(
+    $classLoader,
+    $projectDir
+);
+
+$embeddedComposer = $embeddedComposerBuilder
+    ->setComposerFilename('composer.json')
+    ->setVendorDirectory('vendor')
+    ->build();
+
+$embeddedComposer->processAdditionalAutoloads();
+
+$console = new Application($embeddedComposer);
 $console->run();
