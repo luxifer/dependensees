@@ -41,10 +41,16 @@ class CheckCommand extends Command
         $requires = $rootPackage->getRequires();
         $stability = $rootPackage->getMinimumStability();
         $parser = new VersionParser();
+        $manager = $composer->getRepositoryManager();
+        $local = $manager->getLocalRepository();
+        $tmp = $manager->getRepositories();
+        $packagist = $tmp[0];
 
-        foreach ($requires as $name => $package) {
+        foreach ($requires as $name => $link) {
             $match = $this->embeddedComposer->findPackage($name);
-            $string = sprintf('%s || %s', $parser->formatVersion($match), $package->getConstraint()->getPrettyString());
+            $has = $packagist->hasPackage($match);
+            var_dump($has);
+            $string = sprintf('%s => %s || %s', $name, $match->getPrettyVersion(), $link->getPrettyConstraint());
             $output->writeLn($string);
         }
     }
