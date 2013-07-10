@@ -12,6 +12,7 @@ use Composer\Package\CompletePackage;
 use Composer\DependencyResolver\Pool;
 use Composer\Repository\PlatformRepository;
 use Composer\Repository\CompositeRepository;
+use Guzzle\Http\Client;
 
 /**
  * @author Florent Viel <luxifer666@gmail.com>
@@ -31,23 +32,21 @@ class CheckCommand extends Command
     {
         $composer = $this->getComposer(false);
         $manager = $composer->getRepositoryManager();
+        $repositories = $manager->getRepositories();
+        $packagist = $repositories[0];
         $package = $composer->getPackage();
         $requires = $package->getRequires();
         $local = $manager->getLocalRepository();
-        $repositories = $manager->getRepositories();
-        $packagist = $repositories[0];
         $version = new VersionParser();
-        $pool = new Pool($package->getMinimumStability());
-        $platformRepo = new PlatformRepository;
-        $installedRepo = new CompositeRepository(array($local, $platformRepo));
-        $repos = new CompositeRepository(array_merge(array($installedRepo), $composer->getRepositoryManager()->getRepositories()));
+        $client = new Client($this->url);
 
         foreach ($requires as $name => $link) {
             $match = $local->findPackages($name);
             foreach ($match as $package) {
                 if ($package instanceof CompletePackage) {
-                    var_dump($repos->search($package->getName(), ArrayRepository::SEARCH_NAME));
-                    $output->writeLn(sprintf('%s <comment>%s</comment>', str_pad($package->getName(), 25), $package->getPrettyVersion()));
+                    $response = $client->get('/packages/'.$package->getName().'.json')->send()->getBody();
+                    var_dump(json_decode($response, true));
+                    $output->writeLn(sprintf('%s <comment>%s</comment>', str_pad($package->getName(), 25), $version->formatVersion($package)));
                 }
             }
         }

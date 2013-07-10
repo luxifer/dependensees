@@ -14,6 +14,8 @@ class Command extends BaseCommand
 
 	protected $logo;
 
+	protected $url;
+
     public function __construct()
     {
         $this->logo = <<<EOS
@@ -24,6 +26,7 @@ class Command extends BaseCommand
     /_____/\___/ .___/\___/_/ /_/\__,_/\___/_/ /_/____/\___/\___/____/  
               /_/                                                               
 EOS;
+		$this->url = 'https://packagist.org';
 
 		parent::__construct();
         
