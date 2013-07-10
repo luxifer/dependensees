@@ -12,6 +12,23 @@ class Command extends BaseCommand
 {
 	protected $composer;
 
+	protected $logo;
+
+    public function __construct()
+    {
+        $this->logo = <<<EOS
+        ____                            __          _____               
+       / __ \___  ____  ___  ____  ____/ /__  ____ / ___/___  ___  _____
+      / / / / _ \/ __ \/ _ \/ __ \/ __  / _ \/ __ \\\__ \/ _ \/ _ \/ ___/
+     / /_/ /  __/ /_/ /  __/ / / / /_/ /  __/ / / /__/ /  __/  __(__  ) 
+    /_____/\___/ .___/\___/_/ /_/\__,_/\___/_/ /_/____/\___/\___/____/  
+              /_/                                                               
+EOS;
+
+		parent::__construct();
+        
+    }
+
 	/**
      * @param  bool              $required
      * @throws \RuntimeException
