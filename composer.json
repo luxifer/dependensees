@@ -15,8 +15,7 @@
     ],
     "require": {
         "symfony/console": "2.3.*@dev",
-        "composer/composer": "1.0.*@dev",
-        "dflydev/embedded-composer": "1.0.*@dev"
+        "composer/composer": "1.0.*@dev"
     },
     "autoload": {
         "psr-0": {
