@@ -48,9 +48,7 @@ class CheckCommand extends Command
 
         foreach ($requires as $name => $link) {
             $match = $this->embeddedComposer->findPackage($name);
-            $has = $packagist->hasPackage($match);
-            var_dump($has);
-            $string = sprintf('%s => %s || %s', $name, $match->getPrettyVersion(), $link->getPrettyConstraint());
+            $string = sprintf('%s %s', str_pad($name, 30), $match->getPrettyVersion());
             $output->writeLn($string);
         }
     }
