@@ -9,20 +9,16 @@ use Composer\Package\LinkConstraint\VersionConstraint;
  */
 class VersionSort
 {
-    protected $versions;
-
-    public function __construct(array $versions)
+    public function __construct()
     {
-        $this->versions = $versions;
-
         return $this;
     }
 
-    public function sort()
+    public function sort($versions)
     {
-        usort($this->versions, array('self', 'compare'));
+        usort($versions, array('self', 'compare'));
 
-        return $this->versions;
+        return $versions;
     }
 
     public function compare($a, $b)

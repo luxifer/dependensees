@@ -14,6 +14,7 @@ use Composer\Repository\PlatformRepository;
 use Composer\Repository\CompositeRepository;
 use Guzzle\Http\Client;
 use DependenSees\Sort\VersionSort;
+use DependenSees\Trim\VersionTrim;
 
 /**
  * @author Florent Viel <luxifer666@gmail.com>
@@ -40,6 +41,8 @@ class CheckCommand extends Command
         $local = $manager->getLocalRepository();
         $version = new VersionParser();
         $client = new Client($this->url);
+        $sort = new VersionSort();
+        $trim = new VersionTrim();
 
         foreach ($requires as $name => $link) {
             $match = $local->findPackages($name);
@@ -47,10 +50,11 @@ class CheckCommand extends Command
                 if ($package instanceof CompletePackage) {
                     $response = json_decode($client->get('/packages/'.$package->getName().'.json')->send()->getBody(), true);
                     $versions = $response['package']['versions'];
-                    $sort = new VersionSort($versions);
-                    $versions = $sort->sort();
-                    $latest = $versions[0];
-                    $output->writeLn(sprintf('%s <comment>%s</comment> <info>%s</info>', str_pad($package->getName(), 25), str_pad($package->getPrettyVersion(), 10), $latest['version']));
+                    $versions = $sort->sort($versions);
+                    $stability = VersionParser::parseStability($package->getPrettyVersion());
+                    $versions = $trim->trim($versions, $stability);
+                    $latest = array_shift($versions);
+                    $output->writeLn(sprintf('%s <comment>%s</comment> <info>%s</info>', str_pad($package->getName(), 25), str_pad($package->getPrettyVersion(), 15), $latest['version']));
                 }
             }
         }
