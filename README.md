@@ -1,6 +1,27 @@
 Composer Dependencies Command-line checker
 ==========================================
 
+Installation
+------------
+
+```json
+{
+    "require": {
+        "luxifer/dependensees": "dev-master"
+    },
+    "config": {
+        "bin-dir": "bin/"
+    }
+}
+```
+
+Usage
+-----
+
+```bash
+$ php bin/dependensees
+```
+
 Command output
 --------------
 
