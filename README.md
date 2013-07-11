@@ -42,3 +42,9 @@ Precessing...
 
 3 of 3 packages are up to date.
 ```
+
+TODO
+----
+
+* Sort version by name and date if stable
+* Build gemnasium-like html page
