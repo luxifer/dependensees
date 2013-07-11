@@ -53,6 +53,10 @@ class CheckCommand extends Command
         $pass = 0;
         $count = 0;
 
+        $output->writeLn(sprintf('Name        : <comment>%s</comment>', $package->getName()));
+        $output->writeLn(sprintf('version     : <comment>%s</comment>', $package->getPrettyVersion()));
+        $output->writeLn(sprintf('Description : <comment>%s</comment>', $package->getDescription()));
+        $output->writeLn('');
         $output->writeLn('Precessing...');
         $output->writeLn('');
 
