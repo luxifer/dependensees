@@ -2,13 +2,14 @@
 
 namespace DependenSees\Sort;
 
+use Composer\Package\LinkConstraint\VersionConstraint;
+
 /**
  * @author Florent Viel <luxifer666@gmail.com>
  */
 class VersionSort
 {
     protected $versions;
-    protected $constraint;
 
     public function __construct(array $versions)
     {
@@ -26,6 +27,8 @@ class VersionSort
 
     public function compare($a, $b)
     {
-        return version_compare($a['version'], $b['version'], '<');
+        $constraint = new VersionConstraint('>', '');
+
+        return $constraint->versionCompare($a['version'], $b['version'], '<', true);
     }
 }
