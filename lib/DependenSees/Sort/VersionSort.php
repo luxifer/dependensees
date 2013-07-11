@@ -8,6 +8,7 @@ namespace DependenSees\Sort;
 class VersionSort
 {
     protected $versions;
+    protected $constraint;
 
     public function __construct(array $versions)
     {
@@ -23,15 +24,8 @@ class VersionSort
         return $this->versions;
     }
 
-    public static function compare($a, $b)
+    public function compare($a, $b)
     {
-        $a = new \DateTime($a['time']);
-        $b = new \DateTime($b['time']);
-
-        if ($a == $b) {
-            return 0;
-        }
-
-        return ($a > $b) ? -1 : 1;
+        return version_compare($a['version'], $b['version'], '<');
     }
 }
