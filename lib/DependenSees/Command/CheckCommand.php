@@ -6,7 +6,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Composer\Package\Version\VersionParser;
 use Composer\Repository\ArrayRepository;
 use Composer\Package\CompletePackage;
 use Composer\DependencyResolver\Pool;
@@ -15,6 +14,7 @@ use Composer\Repository\CompositeRepository;
 use Guzzle\Http\Client;
 use DependenSees\Sort\VersionSort;
 use DependenSees\Trim\VersionTrim;
+use Composer\Package\Version\VersionParser;
 
 /**
  * @author Florent Viel <luxifer666@gmail.com>
@@ -39,7 +39,6 @@ class CheckCommand extends Command
         $package = $composer->getPackage();
         $requires = $package->getRequires();
         $local = $manager->getLocalRepository();
-        $version = new VersionParser();
         $client = new Client($this->url);
         $sort = new VersionSort();
         $trim = new VersionTrim();
@@ -57,7 +56,7 @@ class CheckCommand extends Command
         $output->writeLn(sprintf('version     : <comment>%s</comment>', $package->getPrettyVersion()));
         $output->writeLn(sprintf('Description : <comment>%s</comment>', $package->getDescription()));
         $output->writeLn('');
-        $output->writeLn('Precessing...');
+        $output->writeLn('Processing...');
         $output->writeLn('');
 
         foreach ($requires as $name => $link) {
@@ -67,9 +66,10 @@ class CheckCommand extends Command
                     $count += 1;
                     $response = json_decode($client->get('/packages/'.$package->getName().'.json')->send()->getBody(), true);
                     $versions = $response['package']['versions'];
-                    $versions = $sort->sort($versions);
                     $stability = VersionParser::parseStability($package->getPrettyVersion());
                     $versions = $trim->trim($versions, $stability);
+                    $versions = $sort->nameSort($versions);
+                    //$versions = $sort->timeSort($versions);
                     $latest = array_shift($versions);
                     $pass += ($package->getPrettyVersion() === $latest['version']) ? 1 : 0;
                     $status = ($package->getPrettyVersion() === $latest['version']) ? 'OK' : 'KO';
