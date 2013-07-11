@@ -69,7 +69,6 @@ class CheckCommand extends Command
                     $stability = VersionParser::parseStability($package->getPrettyVersion());
                     $versions = $trim->trim($versions, $stability);
                     $versions = $sort->nameSort($versions);
-                    //$versions = $sort->timeSort($versions);
                     $latest = array_shift($versions);
                     $pass += ($package->getPrettyVersion() === $latest['version']) ? 1 : 0;
                     $status = ($package->getPrettyVersion() === $latest['version']) ? 'OK' : 'KO';
