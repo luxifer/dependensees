@@ -5,6 +5,10 @@ Command output
 --------------
 
 ```bash
+Name        : luxifer/dependensees
+version     : 1.0.0-dev
+Description : Command-line tool to check wether composer depencies are up to date
+
 Precessing...
 
 +-------------------+------------+------------+------------+
