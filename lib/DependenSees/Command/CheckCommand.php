@@ -13,6 +13,7 @@ use Composer\DependencyResolver\Pool;
 use Composer\Repository\PlatformRepository;
 use Composer\Repository\CompositeRepository;
 use Guzzle\Http\Client;
+use DependenSees\Sort\VersionSort;
 
 /**
  * @author Florent Viel <luxifer666@gmail.com>
@@ -44,9 +45,12 @@ class CheckCommand extends Command
             $match = $local->findPackages($name);
             foreach ($match as $package) {
                 if ($package instanceof CompletePackage) {
-                    $response = $client->get('/packages/'.$package->getName().'.json')->send()->getBody();
-                    var_dump(json_decode($response, true));
-                    $output->writeLn(sprintf('%s <comment>%s</comment>', str_pad($package->getName(), 25), $version->formatVersion($package)));
+                    $response = json_decode($client->get('/packages/'.$package->getName().'.json')->send()->getBody(), true);
+                    $versions = $response['package']['versions'];
+                    $sort = new VersionSort($versions);
+                    $versions = $sort->sort();
+                    $latest = $versions[0];
+                    $output->writeLn(sprintf('%s <comment>%s</comment> <info>%s</info>', str_pad($package->getName(), 25), str_pad($package->getPrettyVersion(), 10), $latest['version']));
                 }
             }
         }
