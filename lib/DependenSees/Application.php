@@ -20,7 +20,7 @@ class Application extends BaseApplication
 
     public function __construct()
     {
-        parent::__construct('DependenSees', '1.0.0-dev');
+        parent::__construct('DependenSees', DependenSees::VERSION);
     }
 
     protected function getCommandName(InputInterface $input)
