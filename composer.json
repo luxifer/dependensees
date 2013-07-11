@@ -16,12 +16,18 @@
     "require": {
         "symfony/console": "2.3.*@dev",
         "composer/composer": "1.0.*@dev",
-        "guzzle/guzzle": "3.7.*@dev"
+        "guzzle/guzzle": "3.7.*@dev",
+        "symfony/filesystem": "2.3.*@dev",
+        "components/bootstrap": "2.3.2",
+        "twig/twig": "1.*"
     },
     "autoload": {
         "psr-0": {
             "DependenSees\\": "lib/"
         }
     },
-    "bin": ["bin/dependensees"]
+    "bin": ["bin/dependensees"],
+    "config": {
+        "component-dir": "public/assets"
+    }
 }

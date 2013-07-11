@@ -1,4 +1,6 @@
 vendor/*
+build/*
+public/*
 
 composer.phar
 composer.lock
