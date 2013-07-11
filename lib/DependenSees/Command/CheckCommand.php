@@ -43,20 +43,46 @@ class CheckCommand extends Command
         $client = new Client($this->url);
         $sort = new VersionSort();
         $trim = new VersionTrim();
+        $table = $this->getHelperSet()->get('table');
+        $table->setHeaders(array(
+            'Name',
+            'Installed',
+            'Available',
+            'Up to date'
+        ));
+        $pass = 0;
+        $count = 0;
+
+        $output->writeLn('Precessing...');
+        $output->writeLn('');
 
         foreach ($requires as $name => $link) {
             $match = $local->findPackages($name);
             foreach ($match as $package) {
                 if ($package instanceof CompletePackage) {
+                    $count += 1;
                     $response = json_decode($client->get('/packages/'.$package->getName().'.json')->send()->getBody(), true);
                     $versions = $response['package']['versions'];
                     $versions = $sort->sort($versions);
                     $stability = VersionParser::parseStability($package->getPrettyVersion());
                     $versions = $trim->trim($versions, $stability);
                     $latest = array_shift($versions);
-                    $output->writeLn(sprintf('%s <comment>%s</comment> <info>%s</info>', str_pad($package->getName(), 25), str_pad($package->getPrettyVersion(), 15), $latest['version']));
+                    $pass += ($package->getPrettyVersion() === $latest['version']) ? 1 : 0;
+                    $status = ($package->getPrettyVersion() === $latest['version']) ? 'OK' : 'KO';
+                    $table->addRow(array(
+                        $package->getName(),
+                        $package->getPrettyVersion(),
+                        $latest['version'],
+                        $status
+                    ));
                 }
             }
         }
+
+        $table->render($output);
+        $output->writeLn('');
+        $output->writeLn(sprintf('%d of %d packages are up to date.', $pass, $count));
+
+        return !($pass == $count);
     }
 }
