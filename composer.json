@@ -1,5 +1,5 @@
 {
-    "name": "DependenSees",
+    "name": "luxifer/dependensees",
     "description": "Command-line tool to check wether composer depencies are up to date",
     "version": "1.0.0-dev",
     "type": "library",
