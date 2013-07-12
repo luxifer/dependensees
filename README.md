@@ -27,10 +27,12 @@ Command output
 
 ```bash
 Name        : luxifer/dependensees
-version     : 1.0.0-dev
+version     : 1.1.0-dev
 Description : Command-line tool to check wether composer dependencies are up to date
 
-Processing...
+Processing......
+
+Requires
 
 Name                 | Installed  | Available  | Outdated
 ---------------------+------------+------------+---------

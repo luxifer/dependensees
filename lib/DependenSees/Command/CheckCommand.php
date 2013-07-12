@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use DependenSees\Helper\TableHelper;
 use DependenSees\Parser\RequireParser;
+use DependenSees\Builder\StatusBuilder;
 
 /**
  * @author Florent Viel <luxifer666@gmail.com>
@@ -77,6 +78,9 @@ class CheckCommand extends Command
 
         $output->writeLn('');
         $output->writeLn(sprintf('%d of %d packages are outdated.', $outdated, $count));
+
+        $builder = new StatusBuilder();
+        $builder->render($package, array_merge($req, $devReq));
 
         return ($outdated == $count);
     }
