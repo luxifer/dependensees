@@ -14,6 +14,7 @@ class StatusBuilder
     protected $twig;
     protected $fs;
     protected $root;
+    protected $outdated;
 
     public function __construct()
     {
@@ -21,6 +22,7 @@ class StatusBuilder
         $this->loader = new \Twig_Loader_Filesystem(__DIR__.'/templates');
         $this->fs = new Filesystem();
         $this->twig = new \Twig_Environment($this->loader);
+        $this->outdated = 0;
     }
 
     public function render($package, $rows)
@@ -28,8 +30,10 @@ class StatusBuilder
         $rows = $this->prepareRows($rows);
 
         $output = $this->twig->render('index.html', array(
-            'package' => $package,
-            'rows'    => $rows
+            'package'  => $package,
+            'rows'     => $rows,
+            'outdated' => $this->outdated,
+            'count'    => count($rows)
         ));
 
         $handler = fopen($this->root.'/index.html', 'w+');
@@ -39,9 +43,14 @@ class StatusBuilder
 
     protected function prepareRows($rows)
     {
-        foreach (&$rows as $row) {
-            $status = end($row);
+        foreach ($rows as &$row) {
+            $status = $row[3];
+            unset($row[3]);
             $row['color'] = $status === '-' ? 'success' : 'error';
+            $this->outdated += $status === '-' ? 0 : 1;
+            $row['href'] = sprintf('https://packagist.org/packages/%s', $row[0]);
         }
+
+        return $rows;
     }
 }
