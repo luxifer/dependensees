@@ -19,8 +19,6 @@ class RequireParser
     public function __construct(InstalledRepositoryInterface $local)
     {
         $this->local = $local;
-        $this->outdated = 0;
-        $this->count = 0;
         $this->parser = new VersionsParser;
 
         return $this;
@@ -35,6 +33,8 @@ class RequireParser
 
     public function check($output)
     {
+        $this->outdated = 0;
+        $this->count = 0;
         $rows = array();
 
         foreach ($this->requires as $name => $link) {

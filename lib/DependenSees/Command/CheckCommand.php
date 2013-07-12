@@ -39,6 +39,7 @@ class CheckCommand extends Command
         $outdated = 0;
         $count = 0;
         $parser = new RequireParser($local);
+        $formatter = $this->getHelperSet()->get('formatter');
 
         $output->writeLn(sprintf('Name        : <comment>%s</comment>', $package->getName()));
         $output->writeLn(sprintf('version     : <comment>%s</comment>', $package->getPrettyVersion()));
@@ -58,12 +59,16 @@ class CheckCommand extends Command
 
         if (count($req)) {
             $output->writeLn('');
+            $output->writeln('<info>Requires</info>');
+            $output->writeLn('');
             $table['rows'] = $req;
             $tableHelper = new TableHelper($table);
             $tableHelper->render($output);
         }
 
         if (count($devReq)) {
+            $output->writeLn('');
+            $output->writeln('<info>DevRequires</info>');
             $output->writeLn('');
             $table['rows'] = $devReq;
             $tableHelper = new TableHelper($table);
