@@ -14,10 +14,10 @@
         }
     ],
     "require": {
-        "symfony/console": "2.3.*@dev",
+        "symfony/console": ">=2.1,<2.4-dev",
         "composer/composer": "1.0.*@dev",
         "guzzle/guzzle": "3.7.*@dev",
-        "symfony/filesystem": "2.3.*@dev",
+        "symfony/filesystem": ">=2.1,<2.4-dev",
         "components/bootstrap": "2.3.2",
         "twig/twig": "1.*"
     },

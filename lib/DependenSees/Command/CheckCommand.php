@@ -15,6 +15,7 @@ use Guzzle\Http\Client;
 use DependenSees\Sort\VersionSort;
 use DependenSees\Trim\VersionTrim;
 use Composer\Package\Version\VersionParser;
+use DependenSees\Helper\TableHelper;
 
 /**
  * @author Florent Viel <luxifer666@gmail.com>
@@ -42,13 +43,13 @@ class CheckCommand extends Command
         $client = new Client($this->url);
         $sort = new VersionSort();
         $trim = new VersionTrim();
-        $table = $this->getHelperSet()->get('table');
-        $table->setHeaders(array(
+        $table = array('header' => array(), 'rows' => array());
+        $table['header'] = array(
             'Name',
             'Installed',
             'Available',
             'Up to date'
-        ));
+        );
         $pass = 0;
         $count = 0;
 
@@ -72,17 +73,19 @@ class CheckCommand extends Command
                     $latest = array_shift($versions);
                     $pass += ($package->getPrettyVersion() === $latest['version']) ? 1 : 0;
                     $status = ($package->getPrettyVersion() === $latest['version']) ? 'OK' : 'KO';
-                    $table->addRow(array(
+                    $table['rows'][] = array(
                         $package->getName(),
                         $package->getPrettyVersion(),
                         $latest['version'],
                         $status
-                    ));
+                    );
                 }
             }
         }
 
-        $table->render($output);
+        $tableHelper = new TableHelper($table);
+        $tableHelper->render($output);
+
         $output->writeLn('');
         $output->writeLn(sprintf('%d of %d packages are up to date.', $pass, $count));
 
