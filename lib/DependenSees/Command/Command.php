@@ -10,11 +10,9 @@ use DependenSees\Application;
  */
 class Command extends BaseCommand
 {
-	protected $composer;
+    protected $composer;
 
-	protected $logo;
-
-	protected $url;
+    protected $logo;
 
     public function __construct()
     {
@@ -26,13 +24,12 @@ class Command extends BaseCommand
     /_____/\___/ .___/\___/_/ /_/\__,_/\___/_/ /_/____/\___/\___/____/  
               /_/                                                               
 EOS;
-		$this->url = 'https://packagist.org';
 
-		parent::__construct();
+    parent::__construct();
         
     }
 
-	/**
+  /**
      * @param  bool              $required
      * @throws \RuntimeException
      * @return Composer
