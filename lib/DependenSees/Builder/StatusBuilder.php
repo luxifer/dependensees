@@ -25,6 +25,8 @@ class StatusBuilder
 
     public function render($package, $rows)
     {
+        $rows = $this->prepareRows($rows);
+
         $output = $this->twig->render('index.html', array(
             'package' => $package,
             'rows'    => $rows
@@ -33,5 +35,13 @@ class StatusBuilder
         $handler = fopen($this->root.'/index.html', 'w+');
         fwrite($handler, $output);
         fclose($handler);
+    }
+
+    protected function prepareRows($rows)
+    {
+        foreach (&$rows as $row) {
+            $status = end($row);
+            $row['color'] = $status === '-' ? 'success' : 'error';
+        }
     }
 }
