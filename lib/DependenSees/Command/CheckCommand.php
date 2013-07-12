@@ -48,9 +48,9 @@ class CheckCommand extends Command
             'Name',
             'Installed',
             'Available',
-            'Up to date'
+            'Outdated'
         );
-        $pass = 0;
+        $outdated = 0;
         $count = 0;
 
         $output->writeLn(sprintf('Name        : <comment>%s</comment>', $package->getName()));
@@ -71,8 +71,8 @@ class CheckCommand extends Command
                     $versions = $trim->trim($versions, $stability);
                     $versions = $sort->nameSort($versions);
                     $latest = array_shift($versions);
-                    $pass += ($package->getPrettyVersion() === $latest['version']) ? 1 : 0;
-                    $status = ($package->getPrettyVersion() === $latest['version']) ? 'OK' : 'KO';
+                    $outdated += ($package->getPrettyVersion() === $latest['version']) ? 0 : 1;
+                    $status = ($package->getPrettyVersion() === $latest['version']) ? '-' : 'Yes';
                     $table['rows'][] = array(
                         $package->getName(),
                         $package->getPrettyVersion(),
@@ -87,8 +87,8 @@ class CheckCommand extends Command
         $tableHelper->render($output);
 
         $output->writeLn('');
-        $output->writeLn(sprintf('%d of %d packages are up to date.', $pass, $count));
+        $output->writeLn(sprintf('%d of %d packages are outdated.', $outdated, $count));
 
-        return !($pass == $count);
+        return ($outdated == $count);
     }
 }
