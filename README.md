@@ -32,15 +32,16 @@ Description : Command-line tool to check wether composer dependencies are up to 
 
 Processing...
 
-+-------------------+------------+------------+------------+
-| Name              | Installed  | Available  | Up to date |
-+-------------------+------------+------------+------------+
-| symfony/console   | 2.3.x-dev  | dev-master | KO         |
-| composer/composer | dev-master | dev-master | OK         |
-| guzzle/guzzle     | dev-master | dev-master | OK         |
-+-------------------+------------+------------+------------+
+Name                 | Installed  | Available  | Up to date
+---------------------+------------+------------+-----------
+symfony/console      | v2.3.1     | v2.3.1     | OK
+composer/composer    | dev-master | dev-master | OK
+guzzle/guzzle        | dev-master | dev-master | OK
+symfony/filesystem   | v2.3.1     | v2.3.1     | OK
+components/bootstrap | 2.3.2      | 2.3.2      | OK
+twig/twig            | v1.13.1    | v1.13.1    | OK
 
-2 of 3 packages are up to date.
+6 of 6 packages are up to date.
 ```
 
 TODO
