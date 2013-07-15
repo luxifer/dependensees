@@ -30,23 +30,17 @@ Name        : luxifer/dependensees
 version     : 1.1.0-dev
 Description : Command-line tool to check wether composer dependencies are up to date
 
-Processing......
+Processing.......
 
-Requires
+Name                    | Installed  | Available  | Outdated
+------------------------+------------+------------+---------
+symfony/console         | v2.3.1     | v2.3.1     | -
+composer/composer       | dev-master | dev-master | -
+guzzle/guzzle           | v3.7.1     | v3.7.1     | -
+symfony/filesystem      | v2.3.1     | v2.3.1     | -
+components/bootstrap    | 2.3.2      | 2.3.2      | -
+twig/twig               | v1.13.1    | v1.13.1    | -
+components/font-awesome | 3.2.0      | 3.2.0      | -
 
-Name                 | Installed  | Available  | Outdated
----------------------+------------+------------+---------
-symfony/console      | v2.3.1     | v2.3.1     | -
-composer/composer    | dev-master | dev-master | -
-guzzle/guzzle        | v3.7.1     | v3.7.1     | -
-symfony/filesystem   | v2.3.1     | v2.3.1     | -
-components/bootstrap | 2.3.2      | 2.3.2      | -
-twig/twig            | v1.13.1    | v1.13.1    | -
-
-0 of 6 packages are outdated.
+0 of 7 packages are outdated.
 ```
-
-TODO
-----
-
-* Build gemnasium-like html page
