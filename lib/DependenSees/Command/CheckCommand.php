@@ -49,38 +49,25 @@ class CheckCommand extends Command
         $output->write('Processing');
 
         
-        $req = $parser->setRequires($package->getRequires())->check($output);
+        $requires = $parser->setRequires($package->getRequires())->check($output);
         $count += $parser->countPackages();
         $outdated += $parser->countOutdatedPackages();
-        $devReq = $parser->setRequires($package->getDevRequires())->check($output);
+        $requires += $parser->setRequires($package->getDevRequires())->check($output);
         $count += $parser->countPackages();
         $outdated += $parser->countOutdatedPackages();
 
         $output->writeLn('');
+        $output->writeLn('');
 
-        if (count($req)) {
-            $output->writeLn('');
-            $output->writeln('<info>Requires</info>');
-            $output->writeLn('');
-            $table['rows'] = $req;
-            $tableHelper = new TableHelper($table);
-            $tableHelper->render($output);
-        }
-
-        if (count($devReq)) {
-            $output->writeLn('');
-            $output->writeln('<info>DevRequires</info>');
-            $output->writeLn('');
-            $table['rows'] = $devReq;
-            $tableHelper = new TableHelper($table);
-            $tableHelper->render($output);
-        }
+        $table['rows'] = $requires;
+        $tableHelper = new TableHelper($table);
+        $tableHelper->render($output);
 
         $output->writeLn('');
         $output->writeLn(sprintf('%d of %d packages are outdated.', $outdated, $count));
 
         $builder = new StatusBuilder();
-        $builder->render($package, array_merge($req, $devReq));
+        $builder->render($package, $requires);
 
         return ($outdated == $count);
     }

@@ -17,6 +17,13 @@
                 </div>
             </div>
             <div class="row">
+                <dl class="dl-horizontal">
+                    <dt>Name</dt><dd>{{ package.getName }}</dd>
+                    <dt>Version</dt><dd>{{ package.getPrettyVersion }}</dd>
+                    <dt>Description</dt><dd>{{ package.getDescription }}</dd>
+                </dl>
+            </div>
+            <div class="row">
                 <div class="span12">
                     <table class="table">
                         <thead>
@@ -27,10 +34,9 @@
                         <tbody>
                             {% for row in rows %}
                             <tr class="{{ row.color }}">
-                                <td><a href="{{ row.href }}" target="_blank">{{ row[0] }}</a></td>
-                                <td>{{ row[1] }}</td>
-                                <td>{{ row[2] }}</td>
-                                <td>{{ row[3] }}</td>
+                                <td><i class="icon-folder-open"></i> <a href="{{ row.href }}" target="_blank">{{ row.name }}</a></td>
+                                <td>{{ row.current }}</td>
+                                <td>{{ row.latest }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
