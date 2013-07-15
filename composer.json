@@ -5,6 +5,7 @@
     "type": "library",
     "keywords": ["dependencies"],
     "license": "MIT",
+    "homepage": "http://luxifer.github.io/dependensees",
     "authors": [
         {
             "name": "Florent Viel",
