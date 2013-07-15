@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Dependensees by luxifer</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/luxifer/dependensees">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/luxifer/dependensees/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/luxifer/dependensees/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Dependensees</h1>
+          <p>Command-line Tool to check dependencies versions</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/luxifer">luxifer</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a name="composer-dependencies-command-line-checker" class="anchor" href="#composer-dependencies-command-line-checker"><span class="octicon octicon-link"></span></a>Composer Dependencies Command-line checker</h1>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">"require"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"luxifer/dependensees"</span><span class="p">:</span> <span class="s2">"dev-master"</span>
+    <span class="p">},</span>
+    <span class="nt">"config"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"bin-dir"</span><span class="p">:</span> <span class="s2">"bin/"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight"><pre><span class="nv">$ </span>php bin/dependensees
+</pre></div>
+
+<h2>
+<a name="command-output" class="anchor" href="#command-output"><span class="octicon octicon-link"></span></a>Command output</h2>
+
+<div class="highlight"><pre>Name        : luxifer/dependensees
+version     : 1.1.0-dev
+Description : Command-line tool to check wether composer dependencies are up to date
+
+Processing.......
+
+Name                    | Installed  | Available  | Outdated
+------------------------+------------+------------+---------
+symfony/console         | v2.3.1     | v2.3.1     | -
+composer/composer       | dev-master | dev-master | -
+guzzle/guzzle           | v3.7.1     | v3.7.1     | -
+symfony/filesystem      | v2.3.1     | v2.3.1     | -
+components/bootstrap    | 2.3.2      | 2.3.2      | -
+twig/twig               | v1.13.1    | v1.13.1    | -
+components/font-awesome | 3.2.0      | 3.2.0      | -
+
+0 of 7 packages are outdated.
+</pre></div>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
