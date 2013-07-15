@@ -18,11 +18,12 @@ class StatusBuilder
 
     public function __construct()
     {
-        $this->root = __DIR__.'/../../../public';
+        $this->root = __DIR__.'/../../../build';
         $this->loader = new \Twig_Loader_Filesystem(__DIR__.'/templates');
         $this->fs = new Filesystem();
         $this->twig = new \Twig_Environment($this->loader);
         $this->outdated = 0;
+        $this->ensureDirectoryExist($this->root);
     }
 
     public function render($package, $rows)
@@ -58,5 +59,12 @@ class StatusBuilder
         }
 
         return $rows;
+    }
+
+    protected function ensureDirectoryExist($dir)
+    {
+        if (!$this->fs->exists($dir)) {
+            $this->fs->mkdir($dir);
+        }
     }
 }

@@ -30,6 +30,6 @@
     },
     "bin": ["bin/dependensees"],
     "config": {
-        "component-dir": "public/assets"
+        "component-dir": "build/assets"
     }
 }
