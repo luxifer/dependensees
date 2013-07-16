@@ -17,6 +17,7 @@ class StatusBuilder
 
     public function __construct($root)
     {
+        $root = $this->normalizePath($root);
         $this->root = $root.'/../build/dependensees';
         $this->loader = new \Twig_Loader_Filesystem(__DIR__.'/templates');
         $this->fs = new Filesystem();
@@ -37,7 +38,7 @@ class StatusBuilder
             'count'    => count($rows)
         ));
 
-        $this->fs->dumpFile($this->root.'/index.html', $output, 0666);
+        $this->dump($this->root.'/index.html', $output);
     }
 
     protected function prepareRows($rows)
@@ -83,5 +84,17 @@ class StatusBuilder
         }
 
         closedir($dir);
+    }
+
+    protected function dump($file, $content)
+    {
+        $handler = fopen($file, 'w+');
+        fwrite($handler, $content);
+        fclose($handler);
+    }
+
+    protected function normalizePath($dir)
+    {
+        return is_link($dir) ? readlink($dir) : $dir;
     }
 }
