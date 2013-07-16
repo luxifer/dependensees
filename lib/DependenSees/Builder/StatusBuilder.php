@@ -37,9 +37,7 @@ class StatusBuilder
             'count'    => count($rows)
         ));
 
-        $handler = fopen($this->root.'/index.html', 'w+');
-        fwrite($handler, $output);
-        fclose($handler);
+        $this->fs->dumpFile($this->root.'/index.html', $output, 0666);
     }
 
     protected function prepareRows($rows)
@@ -62,8 +60,28 @@ class StatusBuilder
 
     protected function moveAssets($dir)
     {
-        if (!$this->fs->exists($dir.'/build/dependensees/assets')) {
-            $this->fs->rename($dir.'/components', $dir.'/build/dependensees/assets');
+        $base = $dir.'/components';
+        $dest = $dir.'/build/dependensees/assets';
+
+        if (!$this->fs->exists($dest)) {
+            $this->fs->mkdir($dest);
+            $this->walk($base, $dest);
         }
+    }
+
+    protected function walk($base, $dest)
+    {
+        $dir = opendir($base);
+
+        while(false !== ($file = readdir($dir))) {
+            if (is_dir($base.'/'.$file) && $file != '.' && $file != '..') {
+                $this->fs->mkdir($dest.'/'.$file);
+                $this->walk($base.'/'.$file, $dest.'/'.$file);
+            } elseif (is_file($base.'/'.$file)) {
+                $this->fs->copy($base.'/'.$file, $dest.'/'.$file);
+            }
+        }
+
+        closedir($dir);
     }
 }
