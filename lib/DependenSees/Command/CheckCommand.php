@@ -27,6 +27,7 @@ class CheckCommand extends Command
         $composer = $this->getComposer(false);
         $manager = $composer->getRepositoryManager();
         $package = $composer->getPackage();
+        var_dump($composer->getInstallationManager()->getInstallPath($package));
         $local = $manager->getLocalRepository();
         $table = array('header' => array(), 'rows' => array());
         $table['header'] = array(
@@ -64,7 +65,9 @@ class CheckCommand extends Command
         $output->writeLn('');
         $output->write('Building HTML status page... ');
 
-        $builder = new StatusBuilder($this->getRoot());
+        $path = is_dir($composer->getInstallationManager()->getInstallPath($package)) ? realpath($composer->getInstallationManager()->getInstallPath($package).'/../../..') : $this->getRoot().'/..';
+
+        $builder = new StatusBuilder($path);
         $builder->render($package, $requires);
         $output->writeLn('Done!');
 

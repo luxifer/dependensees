@@ -29,5 +29,5 @@ if (!$found) {
 
 use DependenSees\Application;
 
-$console = new Application(__FILE__);
+$console = new Application(__DIR__);
 $console->run();

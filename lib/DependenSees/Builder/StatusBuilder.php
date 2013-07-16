@@ -18,13 +18,13 @@ class StatusBuilder
     public function __construct($root)
     {
         $root = $this->normalizePath($root);
-        $this->root = $root.'/../build/dependensees';
+        $this->root = $root.'/build/dependensees';
         $this->loader = new \Twig_Loader_Filesystem(__DIR__.'/templates');
         $this->fs = new Filesystem();
         $this->twig = new \Twig_Environment($this->loader);
         $this->outdated = 0;
         $this->ensureDirectoryExist($this->root);
-        $this->moveAssets($root.'/..');
+        $this->moveAssets($root);
     }
 
     public function render($package, $rows)
@@ -95,8 +95,6 @@ class StatusBuilder
 
     protected function normalizePath($dir)
     {
-        $file = is_link($dir) ? readlink($dir) : $dir;
-        
-        return dirname($file);
+        return is_link($dir) ? readlink($dir) : $dir;
     }
 }
