@@ -3,7 +3,6 @@
 namespace DependenSees\Builder;
 
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Exception\IOException;
 
 /**
  * @author Florent Viel <luxifer666@gmail.com>

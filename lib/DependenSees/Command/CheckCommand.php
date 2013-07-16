@@ -2,9 +2,7 @@
 
 namespace DependenSees\Command;
 
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use DependenSees\Helper\TableHelper;
 use DependenSees\Parser\RequireParser;
@@ -40,7 +38,6 @@ class CheckCommand extends Command
         $outdated = 0;
         $count = 0;
         $parser = new RequireParser($local);
-        $formatter = $this->getHelperSet()->get('formatter');
 
         $output->writeLn(sprintf('Name        : <comment>%s</comment>', $package->getName()));
         $output->writeLn(sprintf('version     : <comment>%s</comment>', $package->getPrettyVersion()));
