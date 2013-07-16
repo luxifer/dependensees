@@ -44,17 +44,9 @@ class StatusBuilder
     protected function prepareRows($rows)
     {
         foreach ($rows as &$row) {
-            $status = $row[3];
-            unset($row[3]);
-            $row['color'] = $status === '-' ? 'success' : 'error';
-            $this->outdated += $status === '-' ? 0 : 1;
-            $row['href'] = sprintf('https://packagist.org/packages/%s', $row[0]);
-            $row['name'] = $row[0];
-            unset($row[0]);
-            $row['current'] = $row[1];
-            unset($row[1]);
-            $row['latest'] = $row[2];
-            unset($row[2]);
+            $row['color'] = $row['status'] === '-' ? 'success' : 'error';
+            $this->outdated += $row['status'] === '-' ? 0 : 1;
+            $row['href'] = sprintf('https://packagist.org/packages/%s', $row['name']);
         }
 
         return $rows;

@@ -46,10 +46,11 @@ class RequireParser
                     $this->outdated += ($package->getPrettyVersion() === $latest['version']) ? 0 : 1;
                     $status = ($package->getPrettyVersion() === $latest['version']) ? '-' : 'Yes';
                     $rows[] = array(
-                        $package->getName(),
-                        $package->getPrettyVersion(),
-                        $latest['version'],
-                        $status
+                        'name'     => $package->getName(),
+                        'current'  => $package->getPrettyVersion(),
+                        'required' => $link->getConstraint()->getPrettyString(),
+                        'latest'   => $latest['version'],
+                        'status'   => $status
                     );
                     $output->write('.');
                 }

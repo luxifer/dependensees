@@ -21,6 +21,7 @@
                     <dt>Name</dt><dd>{{ package.getName }}</dd>
                     <dt>Version</dt><dd>{{ package.getPrettyVersion }}</dd>
                     <dt>Description</dt><dd>{{ package.getDescription }}</dd>
+                    <dt>Stability</dt><dd>{{ package.getStability }}</dd>
                 </dl>
             </div>
             <div class="row">
@@ -28,7 +29,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th><th>Installed</th><th>Available</th>
+                                <th>Name</th><th>Installed</th><th>Required</th><th>Available</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,6 +37,7 @@
                             <tr class="{{ row.color }}">
                                 <td><i class="icon-folder-open"></i> <a href="{{ row.href }}" target="_blank">{{ row.name }}</a></td>
                                 <td class="text-{{ row.color }}">{{ row.current }}</td>
+                                <td class="text-{{ row.color }}">{{ row.required }}</td>
                                 <td class="text-{{ row.color }}">{{ row.latest }}</td>
                             </tr>
                             {% endfor %}

@@ -30,10 +30,11 @@ class CheckCommand extends Command
         $local = $manager->getLocalRepository();
         $table = array('header' => array(), 'rows' => array());
         $table['header'] = array(
-            'Name',
-            'Installed',
-            'Available',
-            'Outdated'
+            'name'     => 'Name',
+            'current'  => 'Installed',
+            'required' => 'Required',
+            'latest'   => 'Available',
+            'status'   => 'Outdated'
         );
         $outdated = 0;
         $count = 0;
@@ -42,14 +43,12 @@ class CheckCommand extends Command
         $output->writeLn(sprintf('Name        : <comment>%s</comment>', $package->getName()));
         $output->writeLn(sprintf('version     : <comment>%s</comment>', $package->getPrettyVersion()));
         $output->writeLn(sprintf('Description : <comment>%s</comment>', $package->getDescription()));
+        $output->writeLn(sprintf('Stability   : <comment>%s</comment>', $package->getStability()));
         $output->writeLn('');
         $output->write('Processing');
 
         
-        $requires = $parser->setRequires($package->getRequires())->check($output);
-        $count += $parser->countPackages();
-        $outdated += $parser->countOutdatedPackages();
-        $requires += $parser->setRequires($package->getDevRequires())->check($output);
+        $requires = $parser->setRequires(array_merge($package->getRequires(), $package->getDevRequires()))->check($output);
         $count += $parser->countPackages();
         $outdated += $parser->countOutdatedPackages();
 
@@ -61,10 +60,13 @@ class CheckCommand extends Command
         $tableHelper->render($output);
 
         $output->writeLn('');
-        $output->writeLn(sprintf('%d of %d packages are outdated.', $outdated, $count));
+        $output->writeLn(sprintf('<comment>%d</comment> of <comment>%d</comment> packages are outdated.', $outdated, $count));
+        $output->writeLn('');
+        $output->write('Building HTML status page... ');
 
         $builder = new StatusBuilder();
         $builder->render($package, $requires);
+        $output->writeLn('Done!');
 
         return ($outdated == $count);
     }
