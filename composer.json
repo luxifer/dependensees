@@ -28,8 +28,5 @@
             "DependenSees\\": "lib/"
         }
     },
-    "bin": ["bin/dependensees"],
-    "config": {
-        "component-dir": "build/assets"
-    }
+    "bin": ["bin/dependensees"]
 }
