@@ -95,6 +95,8 @@ class StatusBuilder
 
     protected function normalizePath($dir)
     {
-        return is_link($dir) ? readlink($dir) : $dir;
+        $file = is_link($dir) ? readlink($dir) : $dir;
+        
+        return dirname($file);
     }
 }
