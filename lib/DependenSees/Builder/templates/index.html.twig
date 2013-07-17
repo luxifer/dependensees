@@ -9,31 +9,9 @@
         <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="assets/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet">
         <style>
-        html,
-        body {
-            height: 100%;
-        }
-
-        #wrap {
-            min-height: 100%;
-            height: auto !important;
-            height: 100%;
-            /* Negative indent footer by it's height */
-            margin: 0 auto -60px;
-        }
-
-        #footer {
+        footer {
             height: 60px;
             background-color: rgb(245, 245, 245);
-        }
-
-        @media (max-width: 767px) {
-            #footer {
-                margin-left: -20px;
-                margin-right: -20px;
-                padding-left: 20px;
-                padding-right: 20px;
-            }
         }
 
         #credit {
@@ -42,60 +20,58 @@
         </style>
     </head>
     <body>
-        <div id="wrap">
-            <div class="container">
-                <div class="row">
-                    <div class="span12">
-                        <div class="page-header">
-                            <h1>DependenSees <i class="icon-eye-open"></i></h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <dl class="dl-horizontal">
-                        <dt>Name</dt><dd>{{ package.getName }}</dd>
-                        <dt>Version</dt><dd>{{ package.getPrettyVersion }}</dd>
-                        <dt>Description</dt><dd>{{ package.getDescription }}</dd>
-                        <dt>Stability</dt><dd>{{ package.getStability }}</dd>
-                    </dl>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="span12">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th><th>Installed</th><th>Required</th><th>Available</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for row in rows %}
-                                <tr class="{{ row.color }}">
-                                    <td><i class="icon-folder-open"></i> <a href="{{ row.href }}" target="_blank">{{ row.name }}</a></td>
-                                    <td class="text-{{ row.color }}">{{ row.current }}</td>
-                                    <td class="text-{{ row.color }}">{{ row.required }}</td>
-                                    <td class="text-{{ row.color }}">{{ row.latest }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="span12">
-                        <p><strong class="text-{{ outdated > 0 ? 'error' : 'success' }}">{{ outdated }}</strong> of <strong>{{ count }}</strong> dependencies are outdated. <i class="icon-{{ outdated > 0 ? 'frown' : 'smile' }} icon-2x"></i></p>
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="page-header">
+                        <h1>DependenSees <i class="icon-eye-open"></i></h1>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <dl class="dl-horizontal">
+                    <dt>Name</dt><dd>{{ package.getName }}</dd>
+                    <dt>Version</dt><dd>{{ package.getPrettyVersion }}</dd>
+                    <dt>Description</dt><dd>{{ package.getDescription }}</dd>
+                    <dt>Stability</dt><dd>{{ package.getStability }}</dd>
+                </dl>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="span12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th><th>Installed</th><th>Required</th><th>Available</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in rows %}
+                            <tr class="{{ row.color }}">
+                                <td><i class="icon-folder-open"></i> <a href="{{ row.href }}" target="_blank">{{ row.name }}</a></td>
+                                <td class="text-{{ row.color }}">{{ row.current }}</td>
+                                <td class="text-{{ row.color }}">{{ row.required }}</td>
+                                <td class="text-{{ row.color }}">{{ row.latest }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="span12">
+                    <p><strong class="text-{{ outdated > 0 ? 'error' : 'success' }}">{{ outdated }}</strong> of <strong>{{ count }}</strong> dependencies are outdated. <i class="icon-{{ outdated > 0 ? 'frown' : 'smile' }} icon-2x"></i></p>
+                </div>
+            </div>
         </div>
-        <div id="footer">
+        <footer>
             <div class="container">
                 <p class="muted" id="credit">
                     DependenSees {{ version }} by <a href="http://florentviel.com" target="_blank">Florent Viel</a>
                 </p>
             </div>
-        </div>
+        </footer>
         <script src="assets/jquery/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     </body>
