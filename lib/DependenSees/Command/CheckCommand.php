@@ -70,7 +70,7 @@ class CheckCommand extends Command
         $path = getcwd();
 
         $builder = new StatusBuilder($path);
-        $builder->render($package, $requires);
+        $builder->render($package, $requires, $devRequires);
         $output->writeLn('Done!');
 
         return ($outdated == $count);
