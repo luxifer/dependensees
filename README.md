@@ -54,3 +54,4 @@ TODO
 ----
 
 * Add XML status result for continuous integration
+* Add semantic version comparison for stable packages
