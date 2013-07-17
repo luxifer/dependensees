@@ -3,6 +3,7 @@
 namespace DependenSees\Builder;
 
 use Symfony\Component\Filesystem\Filesystem;
+use DependenSees\DependenSees;
 
 /**
  * @author Florent Viel <luxifer666@gmail.com>
@@ -31,11 +32,12 @@ class StatusBuilder
     {
         $rows = $this->prepareRows($rows);
 
-        $output = $this->twig->render('index.html', array(
+        $output = $this->twig->render('index.html.twig', array(
             'package'  => $package,
             'rows'     => $rows,
             'outdated' => $this->outdated,
-            'count'    => count($rows)
+            'count'    => count($rows),
+            'version'  => DependenSees::VERSION
         ));
 
         $this->dump($this->root.'/index.html', $output);
