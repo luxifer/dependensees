@@ -17,12 +17,9 @@ class Application extends BaseApplication
 {
     protected $io;
     protected $composer;
-    protected $root;
 
-    public function __construct($root)
+    public function __construct()
     {
-        $this->root = $root;
-
         parent::__construct('DependenSees', DependenSees::VERSION);
     }
 
@@ -83,10 +80,5 @@ class Application extends BaseApplication
         }
 
         return $this->composer;
-    }
-
-    public function getRoot()
-    {
-        return $this->root;
     }
 }

@@ -51,9 +51,4 @@ EOS;
 
         return $this->composer;
     }
-
-    public function getRoot()
-    {
-        return $this->getApplication()->getRoot();
-    }
 }
