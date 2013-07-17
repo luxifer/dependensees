@@ -44,9 +44,11 @@
                         <li class="active">
                             <a href="#prod" data-toggle="tab">Runtime <span class="muted">({{ prod | length }})</span></a>
                         </li>
+                        {% if dev | length %}
                         <li>
                             <a href="#dev" data-toggle="tab">Development <span class="muted">({{ dev | length }})</span></a>
                         </li>
+                        {% endif %}
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="prod">
@@ -68,6 +70,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        {% if dev | length %}
                         <div class="tab-pane" id="dev">
                             <table class="table">
                                 <thead>
@@ -87,6 +90,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
