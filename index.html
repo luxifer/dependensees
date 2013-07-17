@@ -41,6 +41,8 @@
         <h1>
 <a name="composer-dependencies-command-line-checker" class="anchor" href="#composer-dependencies-command-line-checker"><span class="octicon octicon-link"></span></a>Composer Dependencies Command-line checker</h1>
 
+<p><a href="https://packagist.org/packages/luxifer/dependensees"><img src="https://poser.pugx.org/luxifer/dependensees/v/stable.png" alt="Latest Stable Version"></a> <a href="https://packagist.org/packages/luxifer/dependensees"><img src="https://poser.pugx.org/luxifer/dependensees/downloads.png" alt="Total Downloads"></a></p>
+
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
@@ -64,22 +66,25 @@
 <a name="command-output" class="anchor" href="#command-output"><span class="octicon octicon-link"></span></a>Command output</h2>
 
 <div class="highlight"><pre>Name        : luxifer/dependensees
-version     : 1.1.0-dev
+version     : 1.1.0
 Description : Command-line tool to check wether composer dependencies are up to date
+Stability   : stable
 
 Processing.......
 
-Name                    | Installed  | Available  | Outdated
-------------------------+------------+------------+---------
-symfony/console         | v2.3.1     | v2.3.1     | -
-composer/composer       | dev-master | dev-master | -
-guzzle/guzzle           | v3.7.1     | v3.7.1     | -
-symfony/filesystem      | v2.3.1     | v2.3.1     | -
-components/bootstrap    | 2.3.2      | 2.3.2      | -
-twig/twig               | v1.13.1    | v1.13.1    | -
-components/font-awesome | 3.2.0      | 3.2.0      | -
+Name                    | Installed  | Required       | Available  | Outdated
+------------------------+------------+----------------+------------+---------
+symfony/console         | v2.3.1     | &gt;<span class="o">=</span>2.1,&lt;2.4-dev | v2.3.1     | -
+composer/composer       | dev-master | 1.0.*@dev      | dev-master | -
+guzzle/guzzle           | v3.7.1     | *              | v3.7.1     | -
+symfony/filesystem      | v2.3.1     | &gt;<span class="o">=</span>2.1,&lt;2.4-dev | v2.3.1     | -
+components/bootstrap    | 2.3.2      | 2.3.2          | 2.3.2      | -
+twig/twig               | v1.13.1    | 1.*            | v1.13.1    | -
+components/font-awesome | 3.2.0      | 3.2.0          | 3.2.0      | -
 
 0 of 7 packages are outdated.
+
+Building HTML status page... Done!
 </pre></div>
       </section>
 
