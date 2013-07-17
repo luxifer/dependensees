@@ -4,5 +4,5 @@ namespace DependenSees;
 
 class DependenSees
 {
-    const VERSION = '1.1.0-dev';
+    const VERSION = '1.1.0';
 }
