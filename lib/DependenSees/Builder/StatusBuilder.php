@@ -28,15 +28,20 @@ class StatusBuilder
         $this->moveAssets($root);
     }
 
-    public function render($package, $rows)
+    public function render($package, array $prod, array $dev = array())
     {
-        $rows = $this->prepareRows($rows);
+        $prod = $this->prepareRows($prod);
+
+        if (count($dev)) {
+            $dev = $this->prepareRows($dev);
+        }
 
         $output = $this->twig->render('index.html.twig', array(
             'package'  => $package,
-            'rows'     => $rows,
+            'prod'     => $prod,
+            'dev'      => $dev,
             'outdated' => $this->outdated,
-            'count'    => count($rows),
+            'count'    => count(array_merge($prod, $dev)),
             'version'  => DependenSees::VERSION
         ));
 

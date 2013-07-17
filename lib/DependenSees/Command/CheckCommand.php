@@ -48,14 +48,17 @@ class CheckCommand extends Command
         $output->write('Processing');
 
         
-        $requires = $parser->setRequires(array_merge($package->getRequires(), $package->getDevRequires()))->check($output);
+        $requires = $parser->setRequires($package->getRequires())->check($output);
+        $count += $parser->countPackages();
+        $outdated += $parser->countOutdatedPackages();
+        $devRequires = $parser->setRequires($package->getDevRequires())->check($output);
         $count += $parser->countPackages();
         $outdated += $parser->countOutdatedPackages();
 
         $output->writeLn('');
         $output->writeLn('');
 
-        $table['rows'] = $requires;
+        $table['rows'] = array_merge($requires, $devRequires);
         $tableHelper = new TableHelper($table);
         $tableHelper->render($output);
 

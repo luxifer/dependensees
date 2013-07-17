@@ -38,26 +38,56 @@
                     </dl>
                 </div>
             </div>
-            <hr />
             <div class="row">
                 <div class="span12">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th><th>Installed</th><th>Required</th><th>Available</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for row in rows %}
-                            <tr class="{{ row.color }}">
-                                <td><i class="icon-folder-open"></i> <a href="{{ row.href }}" target="_blank">{{ row.name }}</a></td>
-                                <td class="text-{{ row.color }}">{{ row.current }}</td>
-                                <td class="text-{{ row.color }}">{{ row.required }}</td>
-                                <td class="text-{{ row.color }}">{{ row.latest }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    <ul class="nav nav-tabs" id="envTab">
+                        <li class="active">
+                            <a href="#prod" data-toggle="tab">Runtime <span class="muted">({{ prod | length }})</span></a>
+                        </li>
+                        <li>
+                            <a href="#dev" data-toggle="tab">Development <span class="muted">({{ dev | length }})</span></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="prod">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th><th>Installed</th><th>Required</th><th>Available</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in prod %}
+                                    <tr class="{{ row.color }}">
+                                        <td><i class="icon-folder-open"></i> <a href="{{ row.href }}" target="_blank">{{ row.name }}</a></td>
+                                        <td class="text-{{ row.color }}">{{ row.current }}</td>
+                                        <td class="text-{{ row.color }}">{{ row.required }}</td>
+                                        <td class="text-{{ row.color }}">{{ row.latest }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="dev">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th><th>Installed</th><th>Required</th><th>Available</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tab-pane" id="dev">
+                                    {% for row in dev %}
+                                    <tr class="{{ row.color }}">
+                                        <td><i class="icon-folder-open"></i> <a href="{{ row.href }}" target="_blank">{{ row.name }}</a></td>
+                                        <td class="text-{{ row.color }}">{{ row.current }}</td>
+                                        <td class="text-{{ row.color }}">{{ row.required }}</td>
+                                        <td class="text-{{ row.color }}">{{ row.latest }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <hr />
