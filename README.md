@@ -49,3 +49,8 @@ components/font-awesome | 3.2.0      | 3.2.0          | 3.2.0      | -
 
 Building HTML status page... Done!
 ```
+
+TODO
+----
+
+* Add XML status result for continuous integration
