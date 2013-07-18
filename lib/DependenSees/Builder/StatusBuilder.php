@@ -42,7 +42,8 @@ class StatusBuilder
             'dev'      => $dev,
             'outdated' => $this->outdated,
             'count'    => count(array_merge($prod, $dev)),
-            'version'  => DependenSees::VERSION
+            'version'  => DependenSees::VERSION,
+            'color'    => $this->getMainColor(array_merge($prod, $dev))
         ));
 
         $this->dump($this->root.'/index.html', $output);
@@ -51,7 +52,7 @@ class StatusBuilder
     protected function prepareRows($rows)
     {
         foreach ($rows as &$row) {
-            $row['color'] = $row['status'] === '-' ? 'success' : 'error';
+            $row['color'] = $this->getColorForStatus($row['status']);
             $this->outdated += $row['status'] === '-' ? 0 : 1;
             $row['href'] = sprintf('https://packagist.org/packages/%s', $row['name']);
         }
@@ -103,5 +104,32 @@ class StatusBuilder
     protected function normalizePath($dir)
     {
         return is_link($dir) ? readlink($dir) : $dir;
+    }
+
+    protected function getColorForStatus($status)
+    {
+        switch ($status) {
+            case '-':
+                $color = 'success';
+                break;
+
+            case '<>':
+                $color = 'warning';
+                break;
+
+            case 'Yes':
+                $color = 'error';
+                break;
+        }
+
+        return $color;
+    }
+
+    protected function getMainColor($rows)
+    {
+        $red = $this->outdated * 180 / count($rows);
+        $green = (count($rows) - $this->outdated) * 180 / count($rows);
+
+        return sprintf('rgb(%d, %d, 0)', $red, $green);
     }
 }

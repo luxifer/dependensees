@@ -4,6 +4,7 @@ namespace DependenSees\Parser;
 
 use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Package\CompletePackage;
+use DependenSees\Compare\SemanticCompare;
 
 /**
  * @author Florent Viel <luxifer666@gmail.com>
@@ -15,11 +16,13 @@ class RequireParser
     protected $outdated;
     protected $count;
     protected $parser;
+    protected $compare;
 
     public function __construct(InstalledRepositoryInterface $local)
     {
         $this->local = $local;
         $this->parser = new VersionsParser;
+        $this->compare = new SemanticCompare;
 
         return $this;
     }
@@ -43,14 +46,15 @@ class RequireParser
                 if ($package instanceof CompletePackage) {
                     $this->count += 1;
                     $latest = $this->parser->latest($package);
-                    $this->outdated += ($package->getPrettyVersion() === $latest['version']) ? 0 : 1;
-                    $status = ($package->getPrettyVersion() === $latest['version']) ? '-' : 'Yes';
+                    $status = $this->compare->compare($package->getPrettyVersion(), $latest['version']);
+                    $this->outdated += $status === SemanticCompare::SUCCESS ? 0 : 1;
+                    $message = $this->getMessageForStatus($status);
                     $rows[] = array(
                         'name'     => $package->getName(),
                         'current'  => $package->getPrettyVersion(),
                         'required' => $link->getConstraint()->getPrettyString(),
                         'latest'   => $latest['version'],
-                        'status'   => $status
+                        'status'   => $message
                     );
                     $output->write('.');
                 }
@@ -68,5 +72,25 @@ class RequireParser
     public function countOutdatedPackages()
     {
         return $this->outdated;
+    }
+
+    protected function getMessageForStatus($status)
+    {
+        switch ($status) {
+            case SemanticCompare::SUCCESS:
+                $message = '-';
+                break;
+
+            case SemanticCompare::WARNING:
+            case SemanticCompare::INFO:
+                $message = '<>';
+                break;
+
+            case SemanticCompare::ERROR:
+                $message = 'Yes';
+                break;
+        }
+
+        return $message;
     }
 }
