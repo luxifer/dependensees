@@ -82,7 +82,7 @@ class RequireParser
                 break;
 
             case SemanticCompare::WARNING:
-            case SemanticCompare::INFO:
+            case SemanticCompare::NOTICE:
                 $message = '<>';
                 break;
 
