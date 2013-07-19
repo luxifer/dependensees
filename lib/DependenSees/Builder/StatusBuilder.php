@@ -131,9 +131,16 @@ class StatusBuilder
 
     protected function getMainColor($rows)
     {
-        $red = $this->outdated * 180 / count($rows);
-        $green = (count($rows) - $this->outdated) * 180 / count($rows);
+        $percent = (count($rows) - $this->outdated) * 100 / count($rows);
 
-        return sprintf('rgb(%d, %d, 0)', $red, $green);
+        if ($percent < 50) {
+            $color = 'rgb(185, 74, 72)';
+        } elseif ($percent >= 50 && $percent < 75) {
+            $color = 'rgb(192, 152, 83)';
+        } else {
+            $color = 'rgb(70, 136, 71)';
+        }
+
+        return $color;
     }
 }
