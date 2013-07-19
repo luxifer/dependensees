@@ -82,12 +82,14 @@ class RequireParser
                 break;
 
             case SemanticCompare::WARNING:
+                $message = '!!';
+                break;
             case SemanticCompare::NOTICE:
-                $message = '<>';
+                $message = '!';
                 break;
 
             case SemanticCompare::ERROR:
-                $message = 'Yes';
+                $message = '!!!';
                 break;
         }
 
