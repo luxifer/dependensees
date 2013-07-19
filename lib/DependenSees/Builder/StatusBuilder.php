@@ -113,15 +113,15 @@ class StatusBuilder
                 $color = 'success';
                 break;
 
-            case '!':
+            case '░░░':
                 $color = 'info';
                 break;
 
-            case '!!':
+            case '▒▒▒':
                 $color = 'warning';
                 break;
 
-            case '!!!':
+            case '▓▓▓':
                 $color = 'error';
                 break;
         }

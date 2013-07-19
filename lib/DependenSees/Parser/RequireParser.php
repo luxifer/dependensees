@@ -81,15 +81,16 @@ class RequireParser
                 $message = '-';
                 break;
 
-            case SemanticCompare::WARNING:
-                $message = '!!';
-                break;
             case SemanticCompare::NOTICE:
-                $message = '!';
+                $message = '░░░';
+                break;
+
+            case SemanticCompare::WARNING:
+                $message = '▒▒▒';
                 break;
 
             case SemanticCompare::ERROR:
-                $message = '!!!';
+                $message = '▓▓▓';
                 break;
         }
 
