@@ -1,7 +1,7 @@
 {
     "name": "luxifer/dependensees",
     "description": "Command-line tool to check wether composer dependencies are up to date",
-    "version": "1.2.0-dev",
+    "version": "1.2.0",
     "type": "library",
     "keywords": ["dependencies"],
     "license": "MIT",
@@ -19,9 +19,9 @@
         "composer/composer": "1.0.*@dev",
         "guzzle/guzzle": "*",
         "symfony/filesystem": ">=2.1,<2.4-dev",
-        "components/bootstrap": "2.3.2",
+        "components/bootstrap": "3.0.0",
         "twig/twig": "1.*",
-        "components/font-awesome": "3.2.0"
+        "components/font-awesome": "3.2.1"
     },
     "autoload": {
         "psr-0": {
