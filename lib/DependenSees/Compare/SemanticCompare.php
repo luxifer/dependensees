@@ -9,9 +9,9 @@ use Composer\Package\Version\VersionParser;
  */
 class SemanticCompare
 {
-    const ERROR = 0;
+    const ERROR   = 0;
     const WARNING = 1;
-    const NOTICE = 2;
+    const NOTICE  = 2;
     const SUCCESS = 3;
 
     protected $parser;
@@ -30,16 +30,16 @@ class SemanticCompare
         if ($stability !== 'dev') {
             $splitA = array();
             $splitB = array();
-            $status = self::SUCCESS;
+            $status = array(self::SUCCESS);
 
             list($splitA['major'], $splitA['minor'], $splitA['patch'], $splitA['revision']) = explode('.', $a);
             list($splitB['major'], $splitB['minor'], $splitB['patch'], $splitB['revision']) = explode('.', $b);
 
-            $status = $this->compareMajor($splitA, $splitB);
-            $status = $this->compareMinor($splitA, $splitB);
-            $status = $this->comparePatch($splitA, $splitB);
+            $status[] = $this->compareMajor($splitA, $splitB);
+            $status[] = $this->compareMinor($splitA, $splitB);
+            $status[] = $this->comparePatch($splitA, $splitB);
 
-            return $status;
+            return min($status);
         } else {
             return $a !== $b ? self::ERROR : self::SUCCESS;
         }
