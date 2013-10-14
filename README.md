@@ -1,7 +1,7 @@
 Composer Dependencies Command-line checker
 ==========================================
 
-[![Latest Stable Version](https://poser.pugx.org/luxifer/dependensees/v/stable.png)](https://packagist.org/packages/luxifer/dependensees) [![Total Downloads](https://poser.pugx.org/luxifer/dependensees/downloads.png)](https://packagist.org/packages/luxifer/dependensees)
+[![Latest Stable Version](https://poser.pugx.org/luxifer/dependensees/v/stable.png)](https://packagist.org/packages/luxifer/dependensees) [![Total Downloads](https://poser.pugx.org/luxifer/dependensees/downloads.png)](https://packagist.org/packages/luxifer/dependensees) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/luxifer/dependensees/badges/quality-score.png?s=25e77b028387ae2423f1e8ab01379d4c2e65e9a3)](https://scrutinizer-ci.com/g/luxifer/dependensees/)
 
 Installation
 ------------
