@@ -69,7 +69,6 @@ class Application extends BaseApplication
             } catch (\InvalidArgumentException $e) {
                 if ($required) {
                     $this->io->write($e->getMessage());
-                    exit(1);
                 }
             } catch (JsonValidationException $e) {
                 $errors = ' - ' . implode(PHP_EOL . ' - ', $e->getErrors());

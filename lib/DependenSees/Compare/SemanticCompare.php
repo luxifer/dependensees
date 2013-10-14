@@ -30,25 +30,45 @@ class SemanticCompare
         if ($stability !== 'dev') {
             $splitA = array();
             $splitB = array();
+            $status = self::SUCCESS;
 
             list($splitA['major'], $splitA['minor'], $splitA['patch'], $splitA['revision']) = explode('.', $a);
             list($splitB['major'], $splitB['minor'], $splitB['patch'], $splitB['revision']) = explode('.', $b);
 
-            if ($splitA['major'] !== $splitB['major']) {
-                return self::ERROR;
-            }
+            $status = $this->_compareMajor($splitA, $splitB);
+            $status = $this->_compareMinor($splitA, $splitB);
+            $status = $this->_comparePatch($splitA, $splitB);
 
-            if ($splitA['major'] === $splitB['major'] && $splitA['minor'] !== $splitB['minor']) {
-                return self::WARNING;
-            }
-
-            if (($splitA['major'] === $splitB['major'] && $splitA['minor'] === $splitB['minor']) && ($splitA['patch'] !== $splitB['patch'] || $splitA['revision'] !== $splitB['revision'])) {
-                return self::NOTICE;
-            }
-
-            return self::SUCCESS;
+            return $status;
         } else {
             return $a !== $b ? self::ERROR : self::SUCCESS;
         }
+    }
+
+    protected function _compareMajor($splitA, $splitB)
+    {
+        if ($splitA['major'] !== $splitB['major']) {
+            return self::ERROR;
+        }
+
+        return self::SUCCESS;
+    }
+
+    protected function _compareMinor($splitA, $splitB)
+    {
+        if ($splitA['major'] === $splitB['major'] && $splitA['minor'] !== $splitB['minor']) {
+            return self::WARNING;
+        }
+
+        return self::SUCCESS;
+    }
+
+    protected function _comparePatch($splitA, $splitB)
+    {
+        if (($splitA['major'] === $splitB['major'] && $splitA['minor'] === $splitB['minor']) && ($splitA['patch'] !== $splitB['patch'] || $splitA['revision'] !== $splitB['revision'])) {
+            return self::NOTICE;
+        }
+
+        return self::SUCCESS;
     }
 }
