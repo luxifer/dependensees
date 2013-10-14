@@ -122,7 +122,7 @@ class StatusBuilder
                 break;
 
             case '▓▓▓':
-                $color = 'error';
+                $color = 'danger';
                 break;
         }
 

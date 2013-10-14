@@ -1,128 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>DependenSees</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-        <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <link href="assets/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet">
-        <style>
-        footer {
-            height: 60px;
-            background-color: rgb(245, 245, 245);
-        }
+{% extends 'base.html.twig' %}
 
-        #credit {
-            margin: 20px 0;
-        }
-        </style>
-    </head>
-    <body>
-        <header>
-            <nav class="navbar navbar-default" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">DependenSees <i class="icon-eye-open"></i></a>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="page-header">
-                        <h1><i class="icon-folder-open"></i> {{ package.getName }} <small style="color:{{ color }}">{{ outdated > 0 ? 'Outdated' : 'Up to date' }}</small></h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <dl class="dl-horizontal">
-                        <dt>Version</dt><dd>{{ package.getPrettyVersion }}</dd>
-                        <dt>Description</dt><dd>{{ package.getDescription }}</dd>
-                        <dt>Stability</dt><dd>{{ package.getStability }}</dd>
-                    </dl>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="nav nav-tabs" id="envTab">
-                        <li class="active">
-                            <a href="#prod" data-toggle="tab">Runtime <span class="text-muted">({{ prod | length }})</span></a>
-                        </li>
-                        {% if dev | length %}
-                        <li>
-                            <a href="#dev" data-toggle="tab">Development <span class="text-muted">({{ dev | length }})</span></a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="prod">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th><th>Installed</th><th>Required</th><th>Available</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for row in prod %}
-                                    <tr class="{{ row.color }}">
-                                        <td><i class="icon-folder-open"></i> <a href="{{ row.href }}" target="_blank">{{ row.name }}</a></td>
-                                        <td class="text-{{ row.color }}">{{ row.current }}</td>
-                                        <td class="text-{{ row.color }}">{{ row.required }}</td>
-                                        <td class="text-{{ row.color }}">{{ row.latest }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        {% if dev | length %}
-                        <div class="tab-pane fade" id="dev">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th><th>Installed</th><th>Required</th><th>Available</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tab-pane" id="dev">
-                                    {% for row in dev %}
-                                    <tr class="{{ row.color }}">
-                                        <td><i class="icon-folder-open"></i> <a href="{{ row.href }}" target="_blank">{{ row.name }}</a></td>
-                                        <td class="text-{{ row.color }}">{{ row.current }}</td>
-                                        <td class="text-{{ row.color }}">{{ row.required }}</td>
-                                        <td class="text-{{ row.color }}">{{ row.latest }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            <hr />
-            <div class="row">
-                <div class="col-md-12">
-                    <p><strong class="text-{{ outdated > 0 ? 'error' : 'success' }}">{{ outdated }}</strong> of <strong>{{ count }}</strong> dependencies are outdated. <i class="icon-{{ outdated > 0 ? 'frown' : 'smile' }} icon-2x"></i></p>
-                </div>
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1><i class="icon-folder-open"></i> {{ package.getName }} <small style="color:{{ color }}">{{ outdated > 0 ? 'Outdated' : 'Up to date' }}</small></h1>
             </div>
         </div>
-        <footer>
-            <div class="container">
-                <p class="text-muted" id="credit">
-                    DependenSees {{ version }} written by <a href="http://florentviel.com" target="_blank">Florent Viel</a>
-                </p>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <dl class="dl-horizontal">
+                <dt>Version</dt><dd>{{ package.getPrettyVersion }}</dd>
+                <dt>Description</dt><dd>{{ package.getDescription }}</dd>
+                <dt>Stability</dt><dd>{{ package.getStability }}</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs" id="envTab">
+                <li class="active">
+                    <a href="#prod" data-toggle="tab">Runtime <span class="text-muted">({{ prod | length }})</span></a>
+                </li>
+                {% if dev | length %}
+                <li>
+                    <a href="#dev" data-toggle="tab">Development <span class="text-muted">({{ dev | length }})</span></a>
+                </li>
+                {% endif %}
+            </ul>
+            <div class="tab-content">
+                {% include 'table.html.twig' with {'active': true, 'id': 'prod', 'rows': prod} %}
+                {% if dev | length %}
+                    {% include 'table.html.twig' with {'active': false, 'id': 'dev', 'rows': prod} %}
+                {% endif %}
             </div>
-        </footer>
-        <script src="assets/jquery/jquery.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    </body>
-</html>
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12">
+            <p><strong class="text-{{ outdated > 0 ? 'danger' : 'success' }}">{{ outdated }}</strong> of <strong>{{ count }}</strong> dependencies are outdated. <i class="icon-{{ outdated > 0 ? 'frown' : 'smile' }} icon-2x"></i></p>
+        </div>
+    </div>
+{% endblock content %}
