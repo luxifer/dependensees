@@ -35,9 +35,9 @@ class SemanticCompare
             list($splitA['major'], $splitA['minor'], $splitA['patch'], $splitA['revision']) = explode('.', $a);
             list($splitB['major'], $splitB['minor'], $splitB['patch'], $splitB['revision']) = explode('.', $b);
 
-            $status = $this->_compareMajor($splitA, $splitB);
-            $status = $this->_compareMinor($splitA, $splitB);
-            $status = $this->_comparePatch($splitA, $splitB);
+            $status = $this->compareMajor($splitA, $splitB);
+            $status = $this->compareMinor($splitA, $splitB);
+            $status = $this->comparePatch($splitA, $splitB);
 
             return $status;
         } else {
@@ -45,7 +45,7 @@ class SemanticCompare
         }
     }
 
-    protected function _compareMajor($splitA, $splitB)
+    protected function compareMajor($splitA, $splitB)
     {
         if ($splitA['major'] !== $splitB['major']) {
             return self::ERROR;
@@ -54,7 +54,7 @@ class SemanticCompare
         return self::SUCCESS;
     }
 
-    protected function _compareMinor($splitA, $splitB)
+    protected function compareMinor($splitA, $splitB)
     {
         if ($splitA['major'] === $splitB['major'] && $splitA['minor'] !== $splitB['minor']) {
             return self::WARNING;
@@ -63,7 +63,7 @@ class SemanticCompare
         return self::SUCCESS;
     }
 
-    protected function _comparePatch($splitA, $splitB)
+    protected function comparePatch($splitA, $splitB)
     {
         if (($splitA['major'] === $splitB['major'] && $splitA['minor'] === $splitB['minor']) && ($splitA['patch'] !== $splitB['patch'] || $splitA['revision'] !== $splitB['revision'])) {
             return self::NOTICE;
