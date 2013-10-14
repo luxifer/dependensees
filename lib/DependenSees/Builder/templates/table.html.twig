@@ -1,19 +1,21 @@
 <div class="tab-pane{% if active %} active{% endif %}" id="{{ id }}">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Name</th><th>Installed</th><th>Required</th><th>Available</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in rows %}
-            <tr class="{{ row.color }}">
-                <td><i class="icon-folder-open"></i> <a href="{{ row.href }}" target="_blank">{{ row.name }}</a></td>
-                <td class="text-{{ row.color }}">{{ row.current }}</td>
-                <td class="text-{{ row.color }}">{{ row.required }}</td>
-                <td class="text-{{ row.color }}">{{ row.latest }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th><th>Installed</th><th>Required</th><th>Available</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                <tr class="{{ row.color }}">
+                    <td><i class="icon-folder-open"></i> <a href="{{ row.href }}" target="_blank">{{ row.name }}</a></td>
+                    <td class="text-{{ row.color }}">{{ row.current }}</td>
+                    <td class="text-{{ row.color }}">{{ row.required }}</td>
+                    <td class="text-{{ row.color }}">{{ row.latest }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
