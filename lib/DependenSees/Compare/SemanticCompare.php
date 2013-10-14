@@ -35,7 +35,7 @@ class SemanticCompare
             list($splitB['major'], $splitB['minor'], $splitB['patch'], $splitB['revision']) = explode('.', $b);
 
             if ($splitA['major'] !== $splitB['major']) {
-                return sefl::ERROR;
+                return self::ERROR;
             }
 
             if ($splitA['major'] === $splitB['major'] && $splitA['minor'] !== $splitB['minor']) {
