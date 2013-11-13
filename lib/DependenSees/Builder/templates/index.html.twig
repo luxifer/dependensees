@@ -32,7 +32,7 @@
             <div class="tab-content">
                 {% include 'table.html.twig' with {'active': true, 'id': 'prod', 'rows': prod} %}
                 {% if dev | length %}
-                    {% include 'table.html.twig' with {'active': false, 'id': 'dev', 'rows': prod} %}
+                    {% include 'table.html.twig' with {'active': false, 'id': 'dev', 'rows': dev} %}
                 {% endif %}
             </div>
         </div>
