@@ -21,7 +21,7 @@
         "symfony/filesystem": ">=2.1,<2.4-dev",
         "components/bootstrap": "3.0.0",
         "twig/twig": "1.*",
-        "components/font-awesome": "3.2.1"
+        "components/font-awesome": "4.0.3"
     },
     "autoload": {
         "psr-0": {

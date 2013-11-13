@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
-                <h1><i class="icon-folder-open"></i> {{ package.getName }} <small style="color:{{ color }}">{{ outdated > 0 ? 'Outdated' : 'Up to date' }}</small></h1>
+                <h1><i class="fa fa-folder-open"></i> {{ package.getName }} <small style="color:{{ color }}">{{ outdated > 0 ? 'Outdated' : 'Up to date' }}</small></h1>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
     <hr />
     <div class="row">
         <div class="col-md-12">
-            <p><strong class="text-{{ outdated > 0 ? 'danger' : 'success' }}">{{ outdated }}</strong> of <strong>{{ count }}</strong> dependencies are outdated. <i class="icon-{{ outdated > 0 ? 'frown' : 'smile' }} icon-2x"></i></p>
+            <p><strong class="text-{{ outdated > 0 ? 'danger' : 'success' }}">{{ outdated }}</strong> of <strong>{{ count }}</strong> dependencies are outdated. <i class="fa fa-{{ outdated > 0 ? 'frown' : 'smile' }}-o fa-2x"></i></p>
         </div>
     </div>
 {% endblock content %}
