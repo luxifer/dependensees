@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "symfony/console": ">=2.1,<2.4-dev",
+        "symfony/console": "*",
         "composer/composer": "1.0.*@dev",
         "guzzle/guzzle": "*",
         "symfony/filesystem": ">=2.1,<2.4-dev",
