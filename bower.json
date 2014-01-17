@@ -1,0 +1,20 @@
+{
+  "name": "dependensees",
+  "version": "1.2.0",
+  "homepage": "https://github.com/luxifer/dependensees",
+  "authors": [
+    "Florent Viel <fviel@wanadev.fr>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap"   : "~3.0.3",
+    "font-awesome": "~4.0.3"
+  }
+}

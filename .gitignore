@@ -1,6 +1,5 @@
 vendor/*
 build/*
-components/*
 
 composer.phar
 composer.lock

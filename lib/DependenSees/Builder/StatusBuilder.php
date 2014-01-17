@@ -16,9 +16,9 @@ class StatusBuilder
     protected $root;
     protected $outdated;
 
-    public function __construct($root)
+    public function __construct()
     {
-        $root = $this->normalizePath($root);
+        $root = $this->normalizePath(__DIR__.'/../../../');
         $this->root = $root.'/build/dependensees';
         $this->loader = new \Twig_Loader_Filesystem(__DIR__.'/templates');
         $this->fs = new Filesystem();
@@ -69,7 +69,7 @@ class StatusBuilder
 
     protected function moveAssets($dir)
     {
-        $base = $dir.'/components';
+        $base = $dir.'/bower_components';
         $dest = $dir.'/build/dependensees/assets';
 
         if (!$this->fs->exists($dest)) {
