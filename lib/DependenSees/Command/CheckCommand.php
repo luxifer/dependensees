@@ -67,7 +67,7 @@ class CheckCommand extends Command
         $output->writeLn('');
         $output->write('Building HTML status page... ');
 
-        $builder = new StatusBuilder();
+        $builder = new StatusBuilder(getcwd());
         $builder->render($package, $requires, $devRequires);
         $output->writeLn('Done!');
 

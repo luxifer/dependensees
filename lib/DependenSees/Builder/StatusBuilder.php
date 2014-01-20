@@ -16,16 +16,16 @@ class StatusBuilder
     protected $root;
     protected $outdated;
 
-    public function __construct()
+    public function __construct($projectRoot)
     {
-        $root = $this->normalizePath(__DIR__.'/../../../');
-        $this->root = $root.'/build/dependensees';
+        $libRoot = $this->normalizePath(__DIR__.'/../../../');
+        $this->root = $projectRoot.'/build/dependensees';
         $this->loader = new \Twig_Loader_Filesystem(__DIR__.'/templates');
         $this->fs = new Filesystem();
         $this->twig = new \Twig_Environment($this->loader);
         $this->outdated = 0;
         $this->ensureDirectoryExist($this->root);
-        $this->moveAssets($root);
+        $this->moveAssets($libRoot);
     }
 
     public function render($package, array $prod, array $dev = array())
@@ -70,7 +70,7 @@ class StatusBuilder
     protected function moveAssets($dir)
     {
         $base = $dir.'/bower_components';
-        $dest = $dir.'/build/dependensees/assets';
+        $dest = $this->root.'/assets';
 
         if (!$this->fs->exists($dest)) {
             $this->fs->mkdir($dest);
